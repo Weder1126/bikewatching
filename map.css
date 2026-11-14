@@ -1,0 +1,114 @@
+html,
+body {
+  margin: 0;
+  padding: 5;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  height: 100vh;
+}
+
+header {
+  display: flex;
+  gap: 1em;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+header h1 {
+  margin: 0.3em 0;
+}
+
+header label {
+  margin-left: auto;
+  text-align: right;
+}
+
+#time-slider {
+  width: 16em;
+  vertical-align: middle;
+}
+
+/* Own line so the changing time text never shifts the slider */
+#selected-time,
+#any-time {
+  display: block;
+  min-height: 1.5em;
+}
+
+#any-time {
+  color: #888;
+  font-style: italic;
+}
+
+.description {
+  margin: 0 0 0.75em;
+  color: #555;
+}
+
+#map {
+  position: relative;
+  flex: 1;
+  min-height: 400px;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Shared by map circles and legend swatches */
+#map circle,
+.legend > div {
+  --color-departures: steelblue;
+  --color-arrivals: darkorange;
+  --color: color-mix(
+    in oklch,
+    var(--color-departures) calc(100% * var(--departure-ratio)),
+    var(--color-arrivals)
+  );
+}
+
+#map svg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+#map svg circle {
+  fill: var(--color);
+  fill-opacity: 0.6;
+  stroke: white;
+  stroke-width: 1;
+  pointer-events: auto;
+}
+
+/* Design 2: separate swatches and labels */
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  margin-block: 1em;
+}
+
+.legend-title {
+  color: #666;
+}
+
+.legend > div {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.legend > div::before {
+  content: '';
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  background: var(--color);
+}
